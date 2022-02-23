@@ -336,6 +336,7 @@ class RNAudioRecorderPlayer: RCTEventEmitter, AVAudioRecorderDelegate {
     @objc(startPlayer:httpHeaders:resolve:rejecter:)
     public func startPlayer(
         path: String,
+        rate: Float,
         httpHeaders: [String: String],
         resolve: @escaping RCTPromiseResolveBlock,
         rejecter reject: @escaping RCTPromiseRejectBlock
@@ -360,6 +361,7 @@ class RNAudioRecorderPlayer: RCTEventEmitter, AVAudioRecorderDelegate {
         }
 
         addPeriodicTimeObserver()
+        audioPlayer.rate = rate
         audioPlayer.play()
         resolve(audioFileURL?.absoluteString)
     }
