@@ -321,13 +321,13 @@ class AudioRecorderPlayer {
   /**
    * Start playing with param.
    * @param {string} uri audio uri.
-   * @param {number} rate audio rate.
+   * @param {number} speed audio speed.
    * @param {Record<string, string>} httpHeaders Set of http headers.
    * @returns {Promise<string>}
    */
   startPlayer = async (
     uri: string,
-    rate?: number,
+    speed?: number,
     httpHeaders?: Record<string, string>,
   ): Promise<string> => {
     if (!this._playerSubscription) {
@@ -350,7 +350,7 @@ class AudioRecorderPlayer {
       this._isPlaying = true;
       this._hasPaused = false;
 
-      return RNAudioRecorderPlayer.startPlayer(uri, rate || 1, httpHeaders);
+      return RNAudioRecorderPlayer.startPlayer(uri, speed || 1, httpHeaders);
     }
   };
 
@@ -405,6 +405,19 @@ class AudioRecorderPlayer {
     }
 
     return RNAudioRecorderPlayer.setVolume(volume);
+  };
+
+  /**
+   * Set speed.
+   * @param {number} speed  speed.
+   * @returns {Promise<string>}
+   */
+  setSpeed = async (speed: number): Promise<string> => {
+    if (speed < 0.2 || speed > 10) {
+      throw new Error('Value of volume should be between 0.2 to 10.0');
+    }
+
+    return RNAudioRecorderPlayer.setSpeed(speed);
   };
 
   /**

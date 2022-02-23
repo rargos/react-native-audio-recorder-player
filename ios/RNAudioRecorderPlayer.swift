@@ -343,10 +343,10 @@ class RNAudioRecorderPlayer: RCTEventEmitter, AVAudioRecorderDelegate {
     }
 
 
-    @objc(startPlayer:rate:httpHeaders:resolve:rejecter:)
+    @objc(startPlayer:speed:httpHeaders:resolve:rejecter:)
     public func startPlayer(
         path: String,
-        rate: Float,
+        speed: Float,
         httpHeaders: [String: String],
         resolve: @escaping RCTPromiseResolveBlock,
         rejecter reject: @escaping RCTPromiseRejectBlock
@@ -373,10 +373,11 @@ class RNAudioRecorderPlayer: RCTEventEmitter, AVAudioRecorderDelegate {
         addPeriodicTimeObserver()
 
         audioPlayer?.currentItem?.audioTimePitchAlgorithm = .spectral
-        audioPlayer.playImmediately(atRate: rate)
+        audioPlayer.playImmediately(atRate: speed)
 
         resolve(audioFileURL?.absoluteString)
     }
+
 
     @objc(stopPlayer:rejecter:)
     public func stopPlayer(
@@ -442,5 +443,19 @@ class RNAudioRecorderPlayer: RCTEventEmitter, AVAudioRecorderDelegate {
     ) -> Void {
         audioPlayer.volume = volume
         resolve(volume)
+    }
+
+    @objc(setSpeed:resolve:rejecter:)
+    public func setSpeed(
+        speed: Float,
+        resolve: @escaping RCTPromiseResolveBlock,
+        rejecter reject: @escaping RCTPromiseRejectBlock
+    ) -> Void {
+        if (audioPlayer == nil) {
+            return reject("RNAudioPlayerRecorder", "Player is already stopped.", nil)
+        }
+
+        audioPlayer.rate = speed
+        resolve(speed)
     }
 }
