@@ -321,18 +321,15 @@ class AudioRecorderPlayer {
   /**
    * Start playing with param.
    * @param {string} uri audio uri.
+   * @param {number} rate audio rate.
    * @param {Record<string, string>} httpHeaders Set of http headers.
    * @returns {Promise<string>}
    */
   startPlayer = async (
-    uri?: string,
-    rate?: number,
+    uri: string,
+    rate: number,
     httpHeaders?: Record<string, string>,
   ): Promise<string> => {
-    if (!uri) {
-      uri = 'DEFAULT';
-    }
-
     if (!this._playerSubscription) {
       if (Platform.OS === 'android') {
         this._playerSubscription = DeviceEventEmitter.addListener(
