@@ -263,6 +263,16 @@ class RNAudioRecorderPlayer: RCTEventEmitter, AVAudioRecorderDelegate {
 
         audioSession = AVAudioSession.sharedInstance()
 
+        if let desc = audioSession.availableInputs?.first(where: { (desc) -> Bool in
+            return desc.portType == AVAudioSessionPortBuiltInMic
+        }){
+            do{
+                try audioSession.setPreferredInput(desc)
+            } catch let error{
+                print(error)
+            }
+        }
+
         do {
             try audioSession.setCategory(.playAndRecord, mode: avMode, options: [AVAudioSession.CategoryOptions.defaultToSpeaker, AVAudioSession.CategoryOptions.allowBluetooth])
             try audioSession.setActive(true)
