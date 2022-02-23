@@ -264,7 +264,7 @@ class RNAudioRecorderPlayer: RCTEventEmitter, AVAudioRecorderDelegate {
         audioSession = AVAudioSession.sharedInstance()
 
         if let desc = audioSession.availableInputs?.first(where: { (desc) -> Bool in
-            return desc.portType == AVAudioSessionPortBuiltInMic
+            return desc.portType == AVAudioSession.Port.builtInMic
         }){
             do{
                 try audioSession.setPreferredInput(desc)
