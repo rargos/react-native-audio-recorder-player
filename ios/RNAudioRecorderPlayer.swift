@@ -353,6 +353,7 @@ class RNAudioRecorderPlayer: RCTEventEmitter, AVAudioRecorderDelegate {
         setAudioFileURL(path: path)
         audioPlayerAsset = AVURLAsset(url: audioFileURL!, options:["AVURLAssetHTTPHeaderFieldsKey": httpHeaders])
         audioPlayerItem = AVPlayerItem(asset: audioPlayerAsset!)
+        audioPlayerItem.audioTimePitchAlgorithm = "AVAudioTimePitchAlgorithmSpectral"
 
         if (audioPlayer == nil) {
             audioPlayer = AVPlayer(playerItem: audioPlayerItem)
