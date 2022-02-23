@@ -31,7 +31,7 @@ RCT_EXTERN_METHOD(setVolume:(float)volume
                   rejecter:(RCTPromiseRejectBlock) reject);
 
 RCT_EXTERN_METHOD(startPlayer:(NSString*)path
-                  rate:float
+                  rate:(float)rate
                   httpHeaders:(NSDictionary*)httpHeaders
                   resolve:(RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject);

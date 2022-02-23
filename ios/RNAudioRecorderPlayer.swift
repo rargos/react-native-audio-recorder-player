@@ -361,8 +361,7 @@ class RNAudioRecorderPlayer: RCTEventEmitter, AVAudioRecorderDelegate {
         }
 
         addPeriodicTimeObserver()
-        audioPlayer.play()
-        audioPlayer.rate = rate
+        audioPlayer.playImmediately(atRate: rate)
 
         resolve(audioFileURL?.absoluteString)
     }
