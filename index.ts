@@ -327,7 +327,7 @@ class AudioRecorderPlayer {
    */
   startPlayer = async (
     uri: string,
-    rate: number,
+    rate?: number,
     httpHeaders?: Record<string, string>,
   ): Promise<string> => {
     if (!this._playerSubscription) {
@@ -350,7 +350,7 @@ class AudioRecorderPlayer {
       this._isPlaying = true;
       this._hasPaused = false;
 
-      return RNAudioRecorderPlayer.startPlayer(uri, rate, httpHeaders);
+      return RNAudioRecorderPlayer.startPlayer(uri, rate || 1, httpHeaders);
     }
   };
 
