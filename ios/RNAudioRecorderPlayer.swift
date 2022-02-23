@@ -333,7 +333,7 @@ class RNAudioRecorderPlayer: RCTEventEmitter, AVAudioRecorderDelegate {
     }
 
 
-    @objc(startPlayer:httpHeaders:resolve:rejecter:)
+    @objc(startPlayer:rate:httpHeaders:resolve:rejecter:)
     public func startPlayer(
         path: String,
         rate: Float,
